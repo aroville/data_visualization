@@ -24,7 +24,7 @@ class Place implements Comparable {
   }
   
   int population() {
-    return int(map(log(1+population), log(1+minPop), log(1+maxPop), 150, 255));
+    return int(map(log(1+population), log(1+minPop), log(1+maxPop), 2., 4.));
     //return int(map(population, minPop, maxPop, 150, 255));
   }
   
@@ -32,9 +32,7 @@ class Place implements Comparable {
     int d = density();
     int p = population();
     fill(255, 255-d, 0);
-    //fill(255, 0, 0, d);
-    
-    ellipse(x(), y(), p/72., p/72.);
+    ellipse(x(), y(), p, p);
   }
   
   String label() {

@@ -28,7 +28,7 @@ void draw() {
   drawLabel();
 }
 
-void mouseClicked() {
+void mouseMoved() {
   float dist, minDist = 99999999.;
   int dx, dy;
   for (Place place: places) {
