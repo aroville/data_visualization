@@ -43,6 +43,7 @@ void mouseMoved() {
   
   if (minDist > 30) {
     closestPlace = null;
+    return;
   }
   
   redraw();
@@ -52,16 +53,18 @@ void drawLabel() {
   if (closestPlace == null) 
     return;
 
-  fill(255);
-  stroke(0, 255, 0);
-  strokeWeight(3);
-  int posX = closestPlace.x();
-  int posY = closestPlace.y();
-  
-  int crossSize = 14;
-  line(posX-crossSize, posY, posX+crossSize, posY);
-  line(posX, posY-crossSize, posX, posY+crossSize);
-  text(closestPlace.label(), 10, height-120);
+  try {
+    fill(255);
+    stroke(0, 255, 0);
+    strokeWeight(3);
+    int posX = closestPlace.x();
+    int posY = closestPlace.y();
+    
+    int crossSize = 14;
+    line(posX-crossSize, posY, posX+crossSize, posY);
+    line(posX, posY-crossSize, posX, posY+crossSize);
+    text(closestPlace.label(), 10, height-120);
+  } catch (Exception ex) {}
 }
 
 void readData() {
@@ -108,5 +111,4 @@ void readData() {
   maxDensity = Collections.max(densities);
   
   Collections.sort(places);
-  Collections.reverse(places);
 }
