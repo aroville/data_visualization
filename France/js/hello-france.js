@@ -19,7 +19,7 @@ var svg = d3.select("body")
 function log(v) { return Math.log(1 + v); }
 function size(d) { return sizes(log(d.population)); }
 function color(d) {
-  return d3.rgb(255, 255-colors(log(d.density)), 0).toString();
+  return d3.rgb(255, 255-colors(log(d.density)), 0, 0.8).toString();
 }
 
 
@@ -44,7 +44,7 @@ function drawCross(x, y) {
     .attr('x2', x+14)
     .attr('y2', y)
     .style('stroke', 'rgb(0,255,0)')
-    .style('stroke-width', 3);
+    .style('stroke-width', 2);
 
   svg.append('line')
     .attr('id', 'lv')
@@ -53,7 +53,7 @@ function drawCross(x, y) {
     .attr('x2', x)
     .attr('y2', y+14)
     .style('stroke', 'rgb(0,255,0)')
-    .style('stroke-width', 3);
+    .style('stroke-width', 2);
 }
 
 
@@ -103,7 +103,7 @@ function draw() {
   x = scale('longitude', [0, w]);
   y = scale('latitude', [h, 0]);
   colors = scale('density', [0, 255], true);
-  sizes = scale('population', [0.8, 2.], true);
+  sizes = scale('population', [0.6, 3.], true);
 
   createLabels();
   svg.selectAll('ellipse')
@@ -134,6 +134,8 @@ d3.tsv('data/france.tsv')
     }
   })
   .get(function(error, rows) {
-    dataset = rows;
+    dataset = rows.sort(function(a,b) {
+      return +a.density - +b.density;
+    });;
     draw();
   });
