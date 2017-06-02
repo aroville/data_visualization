@@ -25,6 +25,7 @@ void draw() {
     place.draw();
   }
   
+  drawLegend();
   drawLabel();
 }
 
@@ -65,6 +66,29 @@ void drawLabel() {
     line(posX, posY-crossSize, posX, posY+crossSize);
     text(closestPlace.label(), 10, height-120);
   } catch (Exception ex) {}
+}
+
+void drawLegend() {
+  for (int i = 0; i < 255; i++) {
+    fill(255, 255-i, 0);
+    rect(360 + 0.2 * i, 766, 0.4, 20);
+  }
+  fill(255);
+  Integer minDensityInt = Math.round(minDensity);
+  Integer maxDensityInt = Math.round(maxDensity);
+  text("Density: "+minDensityInt+" - "+maxDensityInt, 420, 786);
+  
+  stroke(0);
+  strokeWeight(1);
+  fill(40,70,128);
+  ellipse(360+16, 796+12, 24, 24);
+  ellipse(360+12, 796+12, 13, 13);
+  ellipse(360+8, 796+12, 3, 3);
+  
+  fill(255);
+  Integer minPopInt = Math.round(minPop);
+  Integer maxPopInt = Math.round(maxPop);
+  text("Population: "+minPopInt+" - "+maxPopInt, 420, 816);
 }
 
 void readData() {
